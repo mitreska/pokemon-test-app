@@ -6,6 +6,7 @@ target 'Pokemon Test App' do
   use_frameworks!
 
   # Pods for Pokemon Test App
+  pod 'Alamofire'
 
   target 'Pokemon Test AppTests' do
     inherit! :search_paths
