@@ -11,7 +11,6 @@ struct PokemonListView: View {
     @StateObject var viewModel = PokemonListViewModel()
     
     var body: some View {
-        NavigationView {
             List(viewModel.pokemonList) { pokemon in
                 NavigationLink {
                     PokemonDetailView(viewModel: PokemonDetailViewModel(pokemonToShow: pokemon.name ?? "Ops! Name not found.. Try again!"))
@@ -20,11 +19,10 @@ struct PokemonListView: View {
                 }
             }
             .environmentObject(viewModel)
-        }
-        .navigationTitle("List of Pokémons")
-        .navigationBarTitleDisplayMode(.large)
-        .onAppear(perform: viewModel.setPokemonList)
-        // onAppear set is temp.
+            .navigationTitle("List of Pokémons")
+            .navigationBarTitleDisplayMode(.large)
+            .onAppear(perform: viewModel.setPokemonList)
+            // onAppear set is temp.
     }
 }
 

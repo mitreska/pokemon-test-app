@@ -12,7 +12,45 @@ struct PokemonDetailView: View {
     @StateObject var viewModel = PokemonDetailViewModel()
     
     var body: some View {
-        Text(viewModel.pokemonToShow)
+        VStack(alignment: .leading) {
+            // HEADER: image and title
+            HStack(alignment: .center) {
+                Image("bulbasaur")
+                    .resizable()
+                    .frame(width: 120, height: 120)
+                    .shadow(radius: 7)
+                
+                VStack(alignment: .leading) {
+                    Text(viewModel.pokemonToShow)
+                        .fontWeight(.medium)
+                        .font(.largeTitle)
+                    
+                    Text("style 1 - style 2")
+                        .fontWeight(.light)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .frame(alignment: .trailing)
+                }
+                
+                Spacer()
+            }
+            .frame(height: 120)
+            
+            Divider()
+                .padding()
+            
+            // CONTENT
+            // - abilities: slot1, slot2, slot3
+            AbilitiesView()
+            // - stats : hp, attack, defense
+            StatsView()
+            
+            Spacer()
+        }
+        .ignoresSafeArea(edges: .top)
+        .padding()
+        .navigationBarTitleDisplayMode(.inline)
+        .environmentObject(viewModel)
     }
 }
 

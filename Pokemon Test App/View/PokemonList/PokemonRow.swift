@@ -16,6 +16,10 @@ struct PokemonRow: View {
                 .resizable()
                 .frame(width: 60, height: 60, alignment: .trailing)
                 .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 60.0)
+                        .strokeBorder(Color.mint, style: StrokeStyle(lineWidth: 2))
+                )
             
             Text(item.name ?? "")
                 .padding()
