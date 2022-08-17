@@ -10,6 +10,7 @@ import SwiftUI
 struct PokemonDetailView: View {
     
     @StateObject var viewModel = PokemonDetailViewModel()
+    @State var presentDialog = false
     
     var body: some View {
         ScrollView (.vertical, showsIndicators: false) {
@@ -35,8 +36,26 @@ struct PokemonDetailView: View {
             
         }
         .padding(.horizontal, 20)
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.large)
         .environmentObject(viewModel)
+        .toolbar(content: {
+            if viewModel.isFavorite {
+                Button(action: {
+                    self.presentDialog = true
+                }, label: {
+                    Label("Add", systemImage: "star.fill")
+                })
+                    .confirmationDialog("You already catch this one!", isPresented: $presentDialog, titleVisibility: .visible) {
+                        Button("OK!", role: .destructive) {}
+                    }
+            } else {
+                Button(action: {
+                    viewModel.capturePokemon()
+                }, label: {
+                    Label("Add", systemImage: "star")
+                })
+            }
+        })
     }
 }
 

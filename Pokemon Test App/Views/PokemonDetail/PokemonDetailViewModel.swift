@@ -13,6 +13,7 @@ class PokemonDetailViewModel: ObservableObject {
     @Published var pokemon: Pokemon?
     
     @Published var pokemonAbilities: String = ""
+    @Published var isFavorite: Bool = false
     
     let apiConnection = APIConn()
     private var task: Cancellable? = nil
@@ -64,5 +65,11 @@ class PokemonDetailViewModel: ObservableObject {
                 print("ERROR: NO TYPE FOUND!")
             }
         }
+    }
+    
+    func capturePokemon() {
+        self.isFavorite = true
+        
+        // api call here!
     }
 }
