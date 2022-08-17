@@ -12,10 +12,16 @@ struct PokemonRow: View {
     
     var body: some View {
         HStack {
-            Image(item.imageName ?? "")
+            // subs image for the right ones
+//            Image(item.imageName ?? "bulbasaur")
+            Image("bulbasaur")
                 .resizable()
                 .frame(width: 60, height: 60, alignment: .trailing)
                 .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 60.0)
+                        .strokeBorder(Color.mint, style: StrokeStyle(lineWidth: 2))
+                )
             
             Text(item.name ?? "")
                 .padding()
@@ -28,6 +34,6 @@ struct PokemonRow: View {
 
 struct PokemonRow_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonRow(item: Pokemon(name: "Bulbasaur", imageName: "bulbasaur", pokemonURL: "url_here"))
+        PokemonRow(item: Pokemon(name: "Bulbasaur", imageName: "bulbasaur", url: "url_here"))
     }
 }
