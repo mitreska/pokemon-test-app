@@ -7,6 +7,7 @@ target 'Pokemon Test App' do
 
   # Pods for Pokemon Test App
   pod 'Alamofire'
+  pod 'SDWebImageSwiftUI'
 
   target 'Pokemon Test AppTests' do
     inherit! :search_paths

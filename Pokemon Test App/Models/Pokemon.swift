@@ -15,6 +15,7 @@ class Pokemon: Identifiable, Codable {
     let abilities: [Ability]?
     let stats: [Stat]?
     let pokemonType: [TypeElement]?
+    let pokemonID: Int?
     
     init(name: String, imageName: String, url: String) {
         self.name = name
@@ -24,24 +25,29 @@ class Pokemon: Identifiable, Codable {
         self.abilities = []
         self.stats = []
         self.pokemonType = []
+        
+        self.pokemonID = nil
     }
     
     init(with pokemon: Pokemon) {
         self.name = pokemon.name
-        self.imageName = ""
+        self.imageName = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(pokemon.pokemonID ?? 1).png"
         self.url = pokemon.url
         
         self.abilities = pokemon.abilities
         self.stats = pokemon.stats
         self.pokemonType = pokemon.pokemonType
+        
+        self.pokemonID = pokemon.pokemonID
     }
     
     enum CodingKeys: String, CodingKey {
         case name
-        case imageName = "location_area_encounters" // not really usefull here!
+        case imageName
         case url
         case abilities
         case stats
         case pokemonType = "types"
+        case pokemonID = "id"
     }
 }

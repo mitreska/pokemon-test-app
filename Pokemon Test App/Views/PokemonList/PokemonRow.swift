@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct PokemonRow: View {
     var item: Pokemon
@@ -13,18 +14,27 @@ struct PokemonRow: View {
     var body: some View {
         HStack {
             // subs image for the right ones
-//            Image(item.imageName ?? "bulbasaur")
-            Image("bulbasaur")
-                .resizable()
-                .frame(width: 60, height: 60, alignment: .trailing)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 60.0)
-                        .strokeBorder(Color.mint, style: StrokeStyle(lineWidth: 2))
-                )
+            if let image = item.imageName {
+                WebImage(url: URL(string: image))
+                    .onSuccess{ _,_,_ in
+
+                    }
+                    .resizable()
+                    .placeholder(Image("egg"))
+                    .indicator(.activity)
+                    .frame(width: 100, height: 100, alignment: .center)
+                    .padding(10)
+            } else {
+                Image("egg")
+                    .resizable()
+                    .frame(width: 100, height: 100, alignment: .center)
+                    .padding(10)
+            }
+            
             
             Text(item.name ?? "")
-                .padding()
+                .padding(.leading, 10)
+                .textCase(.uppercase)
             
             Spacer()
         }

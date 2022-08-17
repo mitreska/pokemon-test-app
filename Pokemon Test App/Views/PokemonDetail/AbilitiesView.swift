@@ -20,15 +20,18 @@ struct AbilitiesView: View {
                 if item.isHidden ?? false {
                     HStack {
                         Text(item.ability.name)
-                            .fontWeight(.regular)
+                            .fontWeight(.bold)
                             .font(.body)
+                            .foregroundColor(Color.secondary)
                             .padding(.leading, 20)
                             .padding(.top, 5)
+                            .textCase(.uppercase)
                         
                         Text("hidden")
                             .fontWeight(.light)
                             .font(.body)
-                            .foregroundColor(Color.secondary)
+                            .foregroundColor(Color.red)
+                            .opacity(30.0)
                             .padding(.leading, 10)
                             .padding(.top, 5)
                         
@@ -40,6 +43,7 @@ struct AbilitiesView: View {
                         .font(.body)
                         .padding(.leading, 20)
                         .padding(.top, 5)
+                        .textCase(.uppercase)
                 }
             }
         } else {
