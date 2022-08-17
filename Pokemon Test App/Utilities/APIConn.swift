@@ -32,4 +32,13 @@ final class APIConn {
             .validate(statusCode: 200..<400)
             .publishDecodable(type: Pokemon.self)
     }
+    
+    func getNextPage(nextURL: String?) -> DataResponsePublisher<APIMainResult> {
+        let url = nextURL ?? self.baseURL
+        
+        return AF
+            .request(url, method: .get)
+            .validate(statusCode: 200..<400)
+            .publishDecodable(type: APIMainResult.self)
+    }
 }

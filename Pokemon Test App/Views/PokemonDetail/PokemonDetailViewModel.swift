@@ -20,8 +20,11 @@ class PokemonDetailViewModel: ObservableObject {
     init() {
     }
     
-    init(pokemonToShow: String) {
-        getPokemon(pokemonURL: pokemonToShow)
+    init(pokemonToShow: Pokemon) {
+        self.pokemon = pokemonToShow
+        if let url = self.pokemon?.url {
+            getPokemon(pokemonURL: url)
+        }
     }
     
     func getPokemon(pokemonURL: String) {

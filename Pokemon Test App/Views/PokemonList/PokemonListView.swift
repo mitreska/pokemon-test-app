@@ -13,16 +13,25 @@ struct PokemonListView: View {
     @StateObject var viewModel = PokemonListViewModel()
     
     var body: some View {
-        List(contentViewModel.pokemonList) { pokemon in
+        List {
+            ForEach(contentViewModel.pokemonList) { pokemon in
                 NavigationLink {
-                    PokemonDetailView(viewModel: PokemonDetailViewModel(pokemonToShow: pokemon.url ?? "Ops! Pokémon not found.. Try again!"))
+                    PokemonDetailView(viewModel: PokemonDetailViewModel(pokemonToShow: pokemon))
                 } label: {
                     PokemonRow(item: pokemon)
                 }
             }
-            .environmentObject(viewModel)
-            .navigationTitle("List of Pokémons")
-            .navigationBarTitleDisplayMode(.large)
+            
+            if contentViewModel.apiResult?.next != nil {
+                ProgressView()
+                    .onAppear {
+                        contentViewModel.getNextPage()
+                    }
+            }
+        }
+        .environmentObject(viewModel)
+        .navigationTitle("List of Pokémons")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 

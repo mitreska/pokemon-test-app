@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct HeaderView: View {
     
@@ -14,16 +15,19 @@ struct HeaderView: View {
     var body: some View {
         HStack(alignment: .center) {
             // need to set image
-            Image("bulbasaur")
+            WebImage(url: URL(string: viewModel.pokemon?.imageName ?? ""))
                 .resizable()
+                .placeholder(Image("egg"))
+                .indicator(.activity)
                 .frame(width: 120, height: 120)
                 .shadow(radius: 7)
             
             VStack(alignment: .leading) {
                 Text(viewModel.pokemon?.name ?? "")
-                    .fontWeight(.medium)
-                    .font(.largeTitle)
+                    .fontWeight(.regular)
+                    .font(.title)
                     .textCase(.uppercase)
+                    .scaledToFit()
                 
                 Text(viewModel.pokemonAbilities)
                     .fontWeight(.light)
