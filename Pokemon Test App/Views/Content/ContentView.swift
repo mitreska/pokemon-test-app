@@ -6,12 +6,24 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ContentView: View {
+    @StateObject var contentViewModel = ContentViewModel()
+    
     var body: some View {
         NavigationView {
-            PokemonListView()
+            if contentViewModel.pokemonList.isEmpty {
+                LoadingView()
+            } else {
+                PokemonListView()
+            }
         }
+        .environmentObject(contentViewModel)
+        .onAppear(perform: {
+            contentViewModel.getPokemons()
+        })
+            
     }
 }
 

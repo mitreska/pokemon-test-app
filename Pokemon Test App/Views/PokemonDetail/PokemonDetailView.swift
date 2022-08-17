@@ -13,39 +13,23 @@ struct PokemonDetailView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            // HEADER: image and title
-            HStack(alignment: .center) {
-                Image("bulbasaur")
-                    .resizable()
-                    .frame(width: 120, height: 120)
-                    .shadow(radius: 7)
+            if viewModel.pokemon != nil {
+                // HEADER: image and title
+                HeaderView()
                 
-                VStack(alignment: .leading) {
-                    Text(viewModel.pokemonToShow)
-                        .fontWeight(.medium)
-                        .font(.largeTitle)
-                    
-                    Text("style 1 - style 2")
-                        .fontWeight(.light)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .frame(alignment: .trailing)
-                }
+                Divider()
+                    .padding()
+                
+                // CONTENT
+                // - abilities: slot1, slot2, slot3
+                AbilitiesView()
+                // - stats : hp, attack, defense
+                StatsView()
                 
                 Spacer()
+            } else {
+                LoadingView()
             }
-            .frame(height: 120)
-            
-            Divider()
-                .padding()
-            
-            // CONTENT
-            // - abilities: slot1, slot2, slot3
-            AbilitiesView()
-            // - stats : hp, attack, defense
-            StatsView()
-            
-            Spacer()
         }
         .ignoresSafeArea(edges: .top)
         .padding()

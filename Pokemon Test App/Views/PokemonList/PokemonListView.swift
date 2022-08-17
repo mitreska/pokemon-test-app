@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct PokemonListView: View {
+    @EnvironmentObject var contentViewModel: ContentViewModel
+    
     @StateObject var viewModel = PokemonListViewModel()
     
     var body: some View {
-            List(viewModel.pokemonList) { pokemon in
+        List(contentViewModel.pokemonList) { pokemon in
                 NavigationLink {
-                    PokemonDetailView(viewModel: PokemonDetailViewModel(pokemonToShow: pokemon.name ?? "Ops! Name not found.. Try again!"))
+                    PokemonDetailView(viewModel: PokemonDetailViewModel(pokemonToShow: pokemon.url ?? "Ops! Pokémon not found.. Try again!"))
                 } label: {
                     PokemonRow(item: pokemon)
                 }
@@ -21,8 +23,6 @@ struct PokemonListView: View {
             .environmentObject(viewModel)
             .navigationTitle("List of Pokémons")
             .navigationBarTitleDisplayMode(.large)
-            .onAppear(perform: viewModel.setPokemonList)
-            // onAppear set is temp.
     }
 }
 

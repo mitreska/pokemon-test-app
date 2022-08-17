@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TypeElement {
+struct TypeElement: Codable {
     let slot: Int
-    let type: Species
+    var type: Species
 }

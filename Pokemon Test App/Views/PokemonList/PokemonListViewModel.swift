@@ -10,12 +10,14 @@ import Foundation
 class PokemonListViewModel: ObservableObject {
     @Published var pokemonList: [Pokemon] = []
     
-    func setPokemonList() {
-        // call for API to set values.
-        
-        pokemonList.append(Pokemon(name: "Bulbasaur", imageName: "bulbasaur", pokemonURL: "url_here"))
-        pokemonList.append(Pokemon(name: "Pikachu", imageName: "bulbasaur", pokemonURL: "url_here"))
-        pokemonList.append(Pokemon(name: "Blastoise", imageName: "bulbasaur", pokemonURL: "url_here"))
-        pokemonList.append(Pokemon(name: "Ash", imageName: "bulbasaur", pokemonURL: "url_here"))
+    init() {
+    }
+    
+    func setPokemonList(pokemonList: [Pokemon]?){
+        if let pokemonList = pokemonList {
+            self.pokemonList = pokemonList
+        } else {
+            self.pokemonList = []
+        }
     }
 }

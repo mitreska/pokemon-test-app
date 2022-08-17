@@ -7,7 +7,17 @@
 
 import Foundation
 
-struct Stat: Codable {
+class Stat: Codable, Identifiable {
     let baseStat: Int
-    let stat: Species
+    var stat: Species
+    
+    init(with stat: Stat) {
+        self.baseStat = stat.baseStat
+        self.stat = stat.stat
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case baseStat = "base_stat"
+        case stat
+    }
 }

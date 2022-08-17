@@ -8,53 +8,33 @@
 import SwiftUI
 
 struct StatsView: View {
+    @EnvironmentObject var viewModel: PokemonDetailViewModel
+    
     var body: some View {
+        
         Text("Stats")
             .fontWeight(.medium)
             .font(.title)
             .padding(.top, 30)
         
-        HStack {
-            Text("HP:")
-                .fontWeight(.bold)
-                .font(.body)
-                .padding(.leading, 20)
-            
-            Text("68")
-                .fontWeight(.medium)
-                .font(.body)
-            
-            Spacer()
-        }
-        
-        HStack {
-            Text("ATTACK:")
-                .fontWeight(.bold)
-                .font(.body)
-                .padding(.leading, 20)
-                .padding(.top, 5)
-            
-            Text("68")
-                .fontWeight(.medium)
-                .font(.body)
-                .padding(.top, 5)
-            
-            Spacer()
-        }
-        
-        HStack {
-            Text("DEFENSE:")
-                .fontWeight(.bold)
-                .font(.body)
-                .padding(.leading, 20)
-                .padding(.top, 5)
-            
-            Text("68")
-                .fontWeight(.medium)
-                .font(.body)
-                .padding(.top, 5)
-            
-            Spacer()
+        if let stats = viewModel.pokemon?.stats {
+            ForEach(stats) { item in
+                HStack {
+                    Text(item.stat.name)
+                        .fontWeight(.bold)
+                        .font(.body)
+                        .padding(.leading, 20)
+                        .padding(.top, 5)
+                        .textCase(.uppercase)
+                        .foregroundColor(Color.secondary)
+                    
+                    Text(String(item.baseStat))
+                        .fontWeight(.medium)
+                        .font(.body)
+                    
+                    Spacer()
+                }
+            }
         }
     }
 }
